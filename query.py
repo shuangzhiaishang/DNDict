@@ -8,12 +8,13 @@ def query(editor):
     dictionary = Dictionary()
     word = editor.note.fields[0]
     phoneticSymbol, result = dictionary.query(word)
-    editor.note.fields[1] = phoneticSymbol
-    editor.note.fields[2] = result
-    if result == "":
+
+    if result is None:
         showInfo(f"未查询到{word}")
     else:
         showInfo("查询成功")
+        editor.note.fields[1] = phoneticSymbol
+        editor.note.fields[2] = result
     update_note(parent=mw, note=editor.note)
     '''
     note_type()

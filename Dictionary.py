@@ -20,6 +20,9 @@ class Dictionary:
         res = cur.execute("SELECT * FROM dictionary WHERE word = '%s'" % word)
         rows = res.fetchall()
 
+        if len(rows) == 0:
+            return None, None
+
         result = '<hr>'
         phoneticSymbol = ""
         for i, row in enumerate(rows):
@@ -38,7 +41,7 @@ class Dictionary:
 
 if __name__ == "__main__":
     d = Dictionary()
-    s, result = d.query("postulate")
-    if (result == ""):
+    s, result = d.query("refutation")
+    if result is None:
         print('not found')
     print(result)
