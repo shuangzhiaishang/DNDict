@@ -27,9 +27,10 @@ class Dictionary:
                 phoneticSymbol = row[1]
             result += f'''<br>{row[-1]}</br><br><b><span class="definition" style="color: #336DF4">{row[2]}</span></b></br>
             '''
-            examples = row[3].split("@")
-            for example in examples:
-                result += f"<br>{example}</br>"
+            if row[3] is not None:
+                examples = row[3].split("@")
+                for example in examples:
+                    result += f"<br>{example}</br>"
             result += "<hr>"
 
         return phoneticSymbol, result
@@ -37,7 +38,7 @@ class Dictionary:
 
 if __name__ == "__main__":
     d = Dictionary()
-    s, result = d.query("novel")
+    s, result = d.query("postulate")
     if (result == ""):
         print('not found')
     print(result)
